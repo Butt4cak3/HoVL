@@ -31,7 +31,7 @@ namespace Scene {
       this.canvas = canvas;
       this.aspectRatio = this.canvas.width / this.canvas.height;
 
-      let ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d");
       if (ctx) {
         this.context = ctx;
       } else {
@@ -46,8 +46,8 @@ namespace Scene {
     }
 
     public setViewport(x: number, y: number, width: number) {
-      let scale = this.canvas.width / width;
-      let height = width / this.aspectRatio;
+      const scale = this.canvas.width / width;
+      const height = width / this.aspectRatio;
 
       this.viewport = {
         x,

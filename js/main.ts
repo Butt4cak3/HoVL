@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const frame = function frame() {
     scene.context.clearRect(0, 0, scene.width, scene.height);
 
-    for (let ball of balls) {
+    for (const ball of balls) {
       ball.draw(scene);
     }
 
