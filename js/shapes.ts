@@ -1,6 +1,4 @@
 namespace Shapes {
-  type Point = Scene.Point;
-
   export abstract class Shape {
     public pos: Vector;
     public color: string;
@@ -24,7 +22,7 @@ namespace Shapes {
     public draw(scene: Scene.Scene): void {
       const { x, y } = scene.toCanvasSpace(this.pos);
       const radius = scene.toCanvasSpace(this.radius);
-      const ctx = scene.getContext();
+      const ctx = scene.context;
 
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);

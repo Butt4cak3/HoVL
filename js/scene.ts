@@ -13,16 +13,29 @@ namespace Scene {
   }
 
   export class Scene {
-    public canvas: HTMLCanvasElement;
-    private ctx: CanvasRenderingContext2D;
-    public viewport: Viewport;
+    public readonly context: CanvasRenderingContext2D;
+
+    private readonly canvas: HTMLCanvasElement;
+    private viewport?: Viewport;
     private aspectRatio: number;
+
+    public get width(): number {
+      return this.canvas.width;
+    }
+
+    public get height(): number {
+      return this.canvas.height;
+    }
 
     constructor(canvas: HTMLCanvasElement) {
       this.canvas = canvas;
-      let ctx = canvas.getContext("2d");
+      this.aspectRatio = this.canvas.width / this.canvas.height;
+
+      const ctx = canvas.getContext("2d");
       if (ctx) {
-        this.ctx = ctx;
+        this.context = ctx;
+      } else {
+        throw new Error("No canvas found");
       }
     }
 
@@ -33,8 +46,8 @@ namespace Scene {
     }
 
     public setViewport(x: number, y: number, width: number) {
-      let scale = this.canvas.width / width;
-      let height = width / this.aspectRatio;
+      const scale = this.canvas.width / width;
+      const height = width / this.aspectRatio;
 
       this.viewport = {
         x,
@@ -47,7 +60,11 @@ namespace Scene {
 
     public toCanvasSpace(len: number): number;
     public toCanvasSpace(vec: Vector): Point;
-    public toCanvasSpace(vec: any) {
+    public toCanvasSpace(vec: Vector | number) {
+      if (!this.viewport) {
+        throw new Error("Please set the viewport first");
+      }
+
       if (vec instanceof Vector) {
         const { x, y, scale } = this.viewport;
 
@@ -55,13 +72,9 @@ namespace Scene {
           x: (vec.x - x) * scale,
           y: (vec.y - y) * scale
         };
-      } else if (typeof vec === "number") {
+      } else {
         return vec * this.viewport.scale;
       }
-    }
-
-    public getContext(): CanvasRenderingContext2D {
-      return this.ctx;
     }
   }
 }
