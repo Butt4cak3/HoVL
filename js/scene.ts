@@ -17,13 +17,12 @@ namespace Scene {
 
     private readonly canvas: HTMLCanvasElement;
     private viewport?: Viewport;
-
-    private get aspectRatio(): number {
-      return this.canvas.width / this.canvas.height;
-    }
+    private aspectRatio: number;
 
     constructor(canvas: HTMLCanvasElement) {
       this.canvas = canvas;
+      this.aspectRatio = this.canvas.width / this.canvas.height;
+
       let ctx = canvas.getContext("2d");
       if (ctx) {
         this.context = ctx;
@@ -35,6 +34,7 @@ namespace Scene {
     public setCanvasSize(width: number, height: number) {
       this.canvas.width = width;
       this.canvas.height = height;
+      this.aspectRatio = this.canvas.width / this.canvas.height;
     }
 
     public setViewport(x: number, y: number, width: number) {
