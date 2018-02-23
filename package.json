@@ -1,5 +1,7 @@
 {
   "scripts": {
+    "watch:all": "parcel demos/index.html",
+    "build:all": "parcel build --public-url '.' demos/index.html",
     "watch": "parcel -d dist/$DEMO demos/$DEMO/index.html",
     "build": "parcel build -d dist/$DEMO --public-url '.' demos/$DEMO/index.html"
   },
