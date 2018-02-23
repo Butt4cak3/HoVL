@@ -5,8 +5,9 @@ namespace Shapes {
     public pos: Vector;
     public color: string;
 
-    constructor(x: number, y: number) {
+    constructor(x: number, y: number, color: string) {
       this.pos = new Vector(x, y);
+      this.color = color;
     }
 
     public abstract draw(scene: Scene.Scene): void;
@@ -16,9 +17,8 @@ namespace Shapes {
     public radius: number;
 
     constructor(x: number, y: number, radius: number, color: string) {
-      super(x, y);
+      super(x, y, color);
       this.radius = radius;
-      this.color = color;
     }
 
     public draw(scene: Scene.Scene): void {
