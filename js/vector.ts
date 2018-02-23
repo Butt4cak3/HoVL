@@ -12,7 +12,7 @@ class Vector {
   }
 
   public add(x: number, y: number): this;
-  public add(vec: Vector): Vector;
+  public add(vec: Vector): this;
   public add(x: Vector | number, y?: number) {
     if (x instanceof Vector) {
       this.x += x.x;
@@ -25,7 +25,7 @@ class Vector {
   }
 
   public sub(x: number, y: number): this;
-  public sub(vec: Vector): Vector;
+  public sub(vec: Vector): this;
   public sub(x: Vector | number, y?: number) {
     if (x instanceof Vector) {
       this.x -= x.x;
