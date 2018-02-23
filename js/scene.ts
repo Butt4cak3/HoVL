@@ -19,6 +19,14 @@ namespace Scene {
     private viewport?: Viewport;
     private aspectRatio: number;
 
+    public get width(): number {
+      return this.canvas.width;
+    }
+
+    public get height(): number {
+      return this.canvas.height;
+    }
+
     constructor(canvas: HTMLCanvasElement) {
       this.canvas = canvas;
       this.aspectRatio = this.canvas.width / this.canvas.height;
