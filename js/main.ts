@@ -8,12 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
   scene.setViewport(0, 0, 10);
 
   const balls: Shapes.Circle[] = [
-    new Circle(2, 2, 1, '#00FF00'),
-    new Circle(8, 8, 1, '#0000FF'),
+    new Circle(2, 2, 1, "#00FF00"),
+    new Circle(8, 8, 1, "#0000FF")
   ];
 
   const frame = function frame() {
-    scene.getContext().clearRect(0, 0, canvas.width, canvas.height);
+    scene.context.clearRect(0, 0, canvas.width, canvas.height);
 
     for (let ball of balls) {
       ball.draw(scene);
@@ -24,4 +24,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.requestAnimationFrame(frame);
 });
-
