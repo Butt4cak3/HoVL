@@ -101,7 +101,7 @@ export abstract class Scene {
   }
 
   private frame(time: number, dt: number): void {
-    this.update.call(null, time, dt);
+    this.update(time / 1000, dt / 1000);
     this.render();
   }
 
