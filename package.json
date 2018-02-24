@@ -11,5 +11,11 @@
     "tslib": "^1.9.0",
     "typescript": "^2.7.2"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions"
+  ]
 }
