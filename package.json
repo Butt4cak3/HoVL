@@ -1,5 +1,18 @@
 {
+  "scripts": {
+    "watch:all": "parcel demos/index.html",
+    "build:all": "parcel build --public-url '.' demos/index.html",
+    "watch": "parcel -d dist/$DEMO demos/$DEMO/index.html",
+    "build": "parcel build -d dist/$DEMO --public-url '.' demos/$DEMO/index.html"
+  },
   "devDependencies": {
+    "parcel-bundler": "^1.6.2",
+    "parcel-plugin-typescript": "^0.6.0",
+    "tslib": "^1.9.0",
     "typescript": "^2.7.2"
+  },
+  "dependencies": {
+    "core-js": "^2.5.3",
+    "raf": "^3.4.0"
   }
 }

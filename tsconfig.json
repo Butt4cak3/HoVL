@@ -1,18 +1,25 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
+    "lib": ["es2017", "dom"],
+
     "sourceMap": true,
     "importHelpers": true,
     "downlevelIteration": true,
+    "isolatedModules": true,
 
     "strict": true,
 
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "hovl/*": ["./src/*"]
+    }
   },
   "exclude": ["node_modules"]
 }
