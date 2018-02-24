@@ -57,7 +57,7 @@ export abstract class Scene {
     const height = width / this.aspectRatio;
 
     this.viewport = { x, y, width, height, scale };
-    this.context.transform(
+    this.context.setTransform(
       scale, 0,
       0, scale,
       -x * scale,
