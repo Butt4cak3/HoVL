@@ -13,7 +13,7 @@ export interface Point {
   y: number;
 }
 
-export class Scene {
+export abstract class Scene {
   public readonly context: CanvasRenderingContext2D;
 
   private readonly canvas: HTMLCanvasElement;
@@ -77,4 +77,25 @@ export class Scene {
       return vec * this.viewport.scale;
     }
   }
+
+  public start(): void {
+    const start = performance.now();
+    let last = start;
+
+    const frame = (now: number) => {
+      const time = now - start;
+      const dt = now - last;
+      last = now;
+      this.frame(time, dt);
+      window.requestAnimationFrame(frame);
+    };
+
+    window.requestAnimationFrame(frame);
+  }
+
+  public clear(): void {
+    this.context.clearRect(0, 0, this.width, this.height);
+  }
+
+  public abstract frame(time: number, td: number): void;
 }
