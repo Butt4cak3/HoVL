@@ -38,14 +38,6 @@ export abstract class Shape {
 export class Circle extends Shape {
   public radius: number;
 
-  public get center() {
-    return this.translation;
-  }
-
-  public set center(value: Vector) {
-    this.translation = value;
-  }
-
   constructor(x: number, y: number, radius: number, color: string) {
     super(color, { translation: new Vector(x, y) });
     this.radius = radius;
