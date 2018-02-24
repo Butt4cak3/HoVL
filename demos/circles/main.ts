@@ -11,7 +11,9 @@ class CirclesScene extends Scene {
     ];
   }
 
-  protected update(): void {
+  protected update(time: number): void {
+    this.shapes[0].pos.x = 5 + Math.sin(time) * 3;
+    this.shapes[1].pos.y = 5 + Math.sin(time) * 3;
   }
 }
 
