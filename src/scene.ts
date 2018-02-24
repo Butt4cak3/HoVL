@@ -1,4 +1,5 @@
 import { Vector } from "hovl/vector";
+import { Shape } from "hovl/shapes";
 
 export interface Viewport {
   x: number;
@@ -15,6 +16,8 @@ export interface Point {
 
 export abstract class Scene {
   public readonly context: CanvasRenderingContext2D;
+
+  protected shapes: Shape[] = [];
 
   private readonly canvas: HTMLCanvasElement;
   private viewport?: Viewport;
@@ -97,5 +100,18 @@ export abstract class Scene {
     this.context.clearRect(0, 0, this.width, this.height);
   }
 
-  public abstract frame(time: number, td: number): void;
+  private frame(time: number, dt: number): void {
+    this.update.call(null, time, dt);
+    this.render();
+  }
+
+  protected abstract update(time: number, dt: number): void;
+
+  protected render(): void {
+    this.clear();
+
+    for (const shape of this.shapes) {
+      shape.draw(this);
+    }
+  }
 }

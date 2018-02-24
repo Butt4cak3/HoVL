@@ -2,23 +2,16 @@ import { Scene } from "hovl/scene";
 import { Circle } from "hovl/shapes";
 
 class CirclesScene extends Scene {
-  private circles: Circle[];
-
   public constructor(canvas: HTMLCanvasElement) {
     super(canvas);
 
-    this.circles = [
+    this.shapes = [
       new Circle(2, 2, 1, "#00FF00"),
       new Circle(8, 8, 1, "#0000FF")
     ];
   }
 
-  public frame(): void {
-    this.clear();
-
-    for (const circle of this.circles) {
-      circle.draw(this);
-    }
+  protected update(): void {
   }
 }
 
