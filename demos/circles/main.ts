@@ -2,6 +2,9 @@ import { Scene } from "hovl/scene";
 import { Circle } from "hovl/shapes";
 
 class CirclesScene extends Scene {
+  // TODO(gustorn): hacky workaround for testing
+  shapes: Circle[];
+
   public constructor(canvas: HTMLCanvasElement) {
     super(canvas);
 
@@ -12,8 +15,8 @@ class CirclesScene extends Scene {
   }
 
   protected update(time: number): void {
-    this.shapes[0].pos.x = 5 + Math.sin(time) * 3;
-    this.shapes[1].pos.y = 5 + Math.sin(time) * 3;
+    this.shapes[0].center.x = 5 + Math.sin(time) * 3;
+    this.shapes[1].center.y = 5 + Math.sin(time) * 3;
   }
 }
 

@@ -1,11 +1,10 @@
-import { Vector } from "hovl/vector";
 import { Shape } from "hovl/shapes";
 
 export interface Viewport {
   x: number;
   y: number;
-  w: number;
-  h: number;
+  width: number;
+  height: number;
   scale: number;
 }
 
@@ -47,38 +46,23 @@ export abstract class Scene {
     this.canvas.width = width;
     this.canvas.height = height;
     this.aspectRatio = this.canvas.width / this.canvas.height;
+
+    if (this.viewport) {
+      this.setViewport(this.viewport.x, this.viewport.y, this.viewport.width);
+    }
   }
 
   public setViewport(x: number, y: number, width: number) {
     const scale = this.canvas.width / width;
     const height = width / this.aspectRatio;
 
-    this.viewport = {
-      x,
-      y,
-      w: width,
-      h: height,
-      scale: scale
-    };
-  }
-
-  public toCanvasSpace(len: number): number;
-  public toCanvasSpace(vec: Vector): Point;
-  public toCanvasSpace(vec: Vector | number) {
-    if (!this.viewport) {
-      throw new Error("Please set the viewport first");
-    }
-
-    if (vec instanceof Vector) {
-      const { x, y, scale } = this.viewport;
-
-      return {
-        x: (vec.x - x) * scale,
-        y: (vec.y - y) * scale
-      };
-    } else {
-      return vec * this.viewport.scale;
-    }
+    this.viewport = { x, y, width, height, scale };
+    this.context.transform(
+      scale, 0,
+      0, scale,
+      -x * scale,
+      -y * scale
+    )
   }
 
   public start(): void {
