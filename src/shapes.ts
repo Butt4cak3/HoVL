@@ -36,12 +36,18 @@ export abstract class Shape {
 }
 
 export class Circle extends Shape {
-  public center: Vector;
   public radius: number;
 
+  public get center() {
+    return this.translation;
+  }
+
+  public set center(value: Vector) {
+    this.translation = value;
+  }
+
   constructor(x: number, y: number, radius: number, color: string) {
-    super(color, {});
-    this.center = new Vector(x, y);
+    super(color, { translation: new Vector(x, y) });
     this.radius = radius;
   }
 
@@ -49,7 +55,7 @@ export class Circle extends Shape {
     const ctx = scene.context;
 
     ctx.beginPath();
-    ctx.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2);
+    ctx.arc(0, 0, this.radius, 0, Math.PI * 2);
     ctx.fillStyle = this.color;
     ctx.fill();
   }

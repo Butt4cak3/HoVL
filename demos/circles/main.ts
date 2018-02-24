@@ -12,11 +12,8 @@ class CirclesScene extends Scene {
   }
 
   protected update(time: number): void {
-    // Setting the translation is relative to the shape's original position
-    // You could also set the circle's center but we don't know the shape's
-    // type at this point
-    this.shapes[0].translation.x = 3 + Math.sin(time) * 3;
-    this.shapes[1].translation.y = -3 + Math.sin(time) * 3;
+    this.shapes[0].translation.x = 5 + Math.sin(time) * 3;
+    this.shapes[1].translation.y = 5 + Math.sin(time) * 3;
   }
 }
 
