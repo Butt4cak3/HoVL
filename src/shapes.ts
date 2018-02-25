@@ -51,3 +51,25 @@ export class Circle extends Shape {
     context.fill();
   }
 }
+
+export class Line extends Shape {
+  public a: Vector;
+  public b: Vector;
+  public width: number;
+
+  constructor(a: Vector, b: Vector, width: number, color: string, trs: Partial<Trs>) {
+    super(color, trs);
+    this.a = Vector(a);
+    this.b = Vector(b);
+    this.width = width;
+  }
+
+  protected drawInternal(context: CanvasRenderingContext2D): void {
+    context.beginPath();
+    context.strokeStyle = this.color;
+    context.lineWidth = this.width;
+    context.moveTo(this.a.x, this.a.y);
+    context.lineTo(this.b.x, this.b.y);
+    context.stroke();
+  }
+}
