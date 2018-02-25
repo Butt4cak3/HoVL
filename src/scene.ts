@@ -14,7 +14,7 @@ export abstract class Scene {
   protected shapes: Shape[] = [];
 
   private readonly canvas: HTMLCanvasElement;
-  private viewport: Viewport;
+  private viewport: Viewport = { x: 0, y: 0, width: 0, height: 0, scale: 1 };
   private aspectRatio: number;
 
   public get width(): number {
@@ -28,7 +28,6 @@ export abstract class Scene {
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
     this.aspectRatio = this.canvas.width / this.canvas.height;
-    this.viewport = { x: 0, y: 0, width: 0, height: 0, scale: 1 };
 
     const ctx = canvas.getContext("2d");
     if (ctx) {
