@@ -13,14 +13,20 @@ export abstract class Shape {
   public rotation: number;
   public scale: Vector;
 
-  constructor(color: string, trs: Partial<Trs>) {
+  constructor(
+    color: string,
+    {
+      translation = new Vector(0, 0),
+      rotation = 0,
+      scale = new Vector(1, 1)
+    }: Partial<Trs>
+  ) {
     this.color = color;
-    this.translation = trs.translation || new Vector(0, 0);
-    this.rotation = trs.rotation || 0;
+
+    this.translation = translation.copy();
+    this.rotation = rotation;
     this.scale =
-      typeof trs.scale === "number"
-        ? new Vector(trs.scale, trs.scale)
-        : trs.scale || new Vector(1, 1);
+      typeof scale === "number" ? new Vector(scale, scale) : scale.copy();
   }
 
   public draw(context: CanvasRenderingContext2D): void {
