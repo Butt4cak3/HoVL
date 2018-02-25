@@ -14,7 +14,7 @@ export abstract class Scene {
   protected shapes: Shape[] = [];
 
   private readonly canvas: HTMLCanvasElement;
-  private viewport?: Viewport;
+  private viewport: Viewport;
   private aspectRatio: number;
 
   public get width(): number {
@@ -28,6 +28,7 @@ export abstract class Scene {
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
     this.aspectRatio = this.canvas.width / this.canvas.height;
+    this.viewport = { x: 0, y: 0, width: 0, height: 0, scale: 1 };
 
     const ctx = canvas.getContext("2d");
     if (ctx) {
@@ -35,6 +36,8 @@ export abstract class Scene {
     } else {
       throw new Error("No canvas found");
     }
+
+    this.setViewport(0, 0, 1);
   }
 
   public setCanvasSize(width: number, height: number) {
@@ -42,9 +45,7 @@ export abstract class Scene {
     this.canvas.height = height;
     this.aspectRatio = this.canvas.width / this.canvas.height;
 
-    if (this.viewport) {
-      this.setViewport(this.viewport.x, this.viewport.y, this.viewport.width);
-    }
+    this.setViewport(this.viewport.x, this.viewport.y, this.viewport.width);
   }
 
   public setViewport(x: number, y: number, width: number) {
