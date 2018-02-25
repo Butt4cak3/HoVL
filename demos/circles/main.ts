@@ -6,12 +6,12 @@ class CirclesScene extends Scene {
     super(canvas);
 
     this.shapes = [
-      new Circle(1, "#00FF00", {
+      new Circle(1, {
         translate: { x: 2, y: 2 }
-      }),
-      new Circle(1, "#0000FF", {
+      }).setStyle({ fillColor: "#00ff00" }),
+      new Circle(1, {
         translate: { x: 8, y: 8 }
-      })
+      }).setStyle({ fillColor: "#0000ff" })
     ];
   }
 
