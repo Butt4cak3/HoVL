@@ -31,27 +31,33 @@ class VerletScene extends Scene {
 
     // These lines create a bounding box that the ball will bounce off of
     this.shapes.push(
-      new Line(Vector(0, 0), Vector(BOX_WIDTH, 0), 0.1, "#000000", {
+      new Line(Vector(0, 0), Vector(BOX_WIDTH, 0), {
         translate: Vector(BOX_X, BOX_Y)
-      }),
-      new Line(Vector(0, 0), Vector(BOX_WIDTH, 0), 0.1, "#000000", {
+      }).setStyle({ strokeWidth: 0.1, strokeColor: "#000000" }),
+
+      new Line(Vector(0, 0), Vector(BOX_WIDTH, 0), {
         translate: Vector(BOX_X, BOX_Y + BOX_HEIGHT)
-      }),
-      new Line(Vector(0, 0), Vector(0, BOX_HEIGHT), 0.1, "#000000", {
+      }).setStyle({ strokeWidth: 0.1, strokeColor: "#000000" }),
+
+      new Line(Vector(0, 0), Vector(0, BOX_HEIGHT), {
         translate: Vector(BOX_X, BOX_Y)
-      }),
-      new Line(Vector(0, 0), Vector(0, BOX_HEIGHT), 0.1, "#000000", {
+      }).setStyle({ strokeWidth: 0.1, strokeColor: "#000000" }),
+
+      new Line(Vector(0, 0), Vector(0, BOX_HEIGHT), {
         translate: Vector(BOX_X + BOX_WIDTH, BOX_Y)
-      })
+      }).setStyle({ strokeWidth: 0.1, strokeColor: "#000000" })
     );
 
     // Create a ball a bit above the center of the box
-    this.ball = new Ball(0.5, "#00AA77", {
-      translate: Vector(BOX_X + (BOX_WIDTH / 2), BOX_Y + 2)
-    });
+    this.ball = new Ball(0.5, {
+      translate: Vector(BOX_X + BOX_WIDTH / 2, BOX_Y + 2)
+    }).setStyle({ fillColor: "#00AA77" });
 
     // Give it a random starting velocity
-    this.ball.vel = add(this.ball.vel, Vector(Math.random() * 40 - 20, Math.random() * 40 - 20));
+    this.ball.vel = add(
+      this.ball.vel,
+      Vector(Math.random() * 40 - 20, Math.random() * 40 - 20)
+    );
 
     // Add the ball to the shapes so that it gets drawn
     this.shapes.push(this.ball);
