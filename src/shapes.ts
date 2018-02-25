@@ -1,4 +1,3 @@
-import { Scene } from "hovl/scene";
 import { Vector } from "hovl/vector";
 
 interface Trs {
@@ -24,16 +23,16 @@ export abstract class Shape {
         : trs.scale || new Vector(1, 1);
   }
 
-  public draw(scene: Scene): void {
-    scene.context.save();
-    scene.context.translate(this.translation.x, this.translation.y);
-    scene.context.rotate(this.rotation);
-    scene.context.scale(this.scale.x, this.scale.y);
-    this.drawInternal(scene);
-    scene.context.restore();
+  public draw(context: CanvasRenderingContext2D): void {
+    context.save();
+    context.translate(this.translation.x, this.translation.y);
+    context.rotate(this.rotation);
+    context.scale(this.scale.x, this.scale.y);
+    this.drawInternal(context);
+    context.restore();
   }
 
-  protected abstract drawInternal(scene: Scene): void;
+  protected abstract drawInternal(context: CanvasRenderingContext2D): void;
 }
 
 export class Circle extends Shape {
@@ -44,12 +43,10 @@ export class Circle extends Shape {
     this.radius = radius;
   }
 
-  protected drawInternal(scene: Scene): void {
-    const ctx = scene.context;
-
-    ctx.beginPath();
-    ctx.arc(0, 0, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = this.color;
-    ctx.fill();
+  protected drawInternal(context: CanvasRenderingContext2D): void {
+    context.beginPath();
+    context.arc(0, 0, this.radius, 0, Math.PI * 2);
+    context.fillStyle = this.color;
+    context.fill();
   }
 }

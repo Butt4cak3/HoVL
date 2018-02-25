@@ -85,7 +85,7 @@ export abstract class Scene {
     this.clear();
 
     for (const shape of this.shapes) {
-      shape.draw(this);
+      shape.draw(this.context);
     }
   }
 }
