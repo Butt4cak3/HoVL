@@ -6,14 +6,18 @@ class CirclesScene extends Scene {
     super(canvas);
 
     this.shapes = [
-      new Circle(2, 2, 1, "#00FF00"),
-      new Circle(8, 8, 1, "#0000FF")
+      new Circle(1, "#00FF00", {
+        translate: { x: 2, y: 2 }
+      }),
+      new Circle(1, "#0000FF", {
+        translate: { x: 8, y: 8 }
+      })
     ];
   }
 
   protected update(time: number): void {
-    this.shapes[0].translation.x = 5 + Math.sin(time) * 3;
-    this.shapes[1].translation.y = 5 + Math.sin(time) * 3;
+    this.shapes[0].translate.x = 5 + Math.sin(time) * 3;
+    this.shapes[1].translate.y = 5 + Math.sin(time) * 3;
   }
 }
 
