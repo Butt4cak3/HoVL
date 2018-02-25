@@ -8,11 +8,6 @@ export interface Viewport {
   scale: number;
 }
 
-export interface Point {
-  x: number;
-  y: number;
-}
-
 export abstract class Scene {
   public readonly context: CanvasRenderingContext2D;
 
@@ -57,12 +52,7 @@ export abstract class Scene {
     const height = width / this.aspectRatio;
 
     this.viewport = { x, y, width, height, scale };
-    this.context.setTransform(
-      scale, 0,
-      0, scale,
-      -x * scale,
-      -y * scale
-    )
+    this.context.setTransform(scale, 0, 0, scale, -x * scale, -y * scale);
   }
 
   public start(): void {

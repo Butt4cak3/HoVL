@@ -12,22 +12,23 @@ export abstract class Shape {
 
   public translation: Vector;
   public rotation: number;
-  public scaling: Vector;
+  public scale: Vector;
 
   constructor(color: string, trs: Partial<Trs>) {
     this.color = color;
     this.translation = trs.translation || new Vector(0, 0);
     this.rotation = trs.rotation || 0;
-    this.scaling = typeof trs.scale === "number"
-      ? new Vector(trs.scale, trs.scale)
-      : trs.scale || new Vector(1, 1);
+    this.scale =
+      typeof trs.scale === "number"
+        ? new Vector(trs.scale, trs.scale)
+        : trs.scale || new Vector(1, 1);
   }
 
   public draw(scene: Scene): void {
     scene.context.save();
     scene.context.translate(this.translation.x, this.translation.y);
     scene.context.rotate(this.rotation);
-    scene.context.scale(this.scaling.x, this.scaling.y);
+    scene.context.scale(this.scale.x, this.scale.y);
     this.drawInternal(scene);
     scene.context.restore();
   }
