@@ -1,45 +1,38 @@
-export class Vector {
-  public x: number;
-  public y: number;
+export interface Vector {
+  x: number;
+  y: number;
+}
 
-  constructor(x: number, y: number) {
-    this.x = x;
-    this.y = y;
+export function Vector(value: Vector | number): Vector;
+export function Vector(x: number, y: number): Vector;
+export function Vector(x: number | Vector, y?: number): Vector {
+  if (typeof x === "number") {
+    return { x, y: y != null ? y : x };
+  } else {
+    return { ...x };
   }
+}
 
-  public copy(): Vector {
-    return new Vector(this.x, this.y);
-  }
+export function dot(lhs: Vector, rhs: Vector): number {
+  return lhs.x * rhs.x + lhs.y * rhs.y;
+}
 
-  public add(x: number, y: number): this;
-  public add(vec: Vector): this;
-  public add(x: Vector | number, y?: number) {
-    if (x instanceof Vector) {
-      this.x += x.x;
-      this.y += x.y;
-    } else {
-      this.x += x;
-      this.y += y!;
-    }
-    return this;
-  }
+export function length(v: Vector): number {
+  return Math.sqrt(dot(v, v));
+}
 
-  public sub(x: number, y: number): this;
-  public sub(vec: Vector): this;
-  public sub(x: Vector | number, y?: number) {
-    if (x instanceof Vector) {
-      this.x -= x.x;
-      this.y -= x.y;
-    } else {
-      this.x -= x;
-      this.y -= y!;
-    }
-    return this;
-  }
+export function add(lhs: Vector, rhs: Vector): Vector {
+  return { x: lhs.x + rhs.x, y: lhs.y + rhs.y };
+}
 
-  public mult(scale: number): this {
-    this.x *= scale;
-    this.y *= scale;
-    return this;
-  }
+export function sub(lhs: Vector, rhs: Vector): Vector {
+  return { x: lhs.x - rhs.x, y: lhs.y - rhs.y };
+}
+
+export function mul(lhs: Vector, rhs: number): Vector {
+  return { x: lhs.x * rhs, y: lhs.y * rhs };
+}
+
+export function div(lhs: Vector, rhs: number): Vector {
+  return { x: lhs.x / rhs, y: lhs.y / rhs };
 }
