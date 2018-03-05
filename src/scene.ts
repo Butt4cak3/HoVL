@@ -71,7 +71,7 @@ export abstract class Scene {
   }
 
   public clear(): void {
-    this.context.clearRect(0, 0, this.width, this.height);
+    this.context.clearRect(this.viewport.x, this.viewport.y, this.viewport.width, this.viewport.height);
   }
 
   private frame(time: number, dt: number): void {
