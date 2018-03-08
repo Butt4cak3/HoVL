@@ -10,6 +10,7 @@ export interface Viewport {
 
 export abstract class Scene {
   public readonly context: CanvasRenderingContext2D;
+  public simulationInterval: number = 10;
 
   protected shapes: Shape[] = [];
 
@@ -56,14 +57,30 @@ export abstract class Scene {
   }
 
   public start(): void {
+    this.startSimulation();
+    this.startRender();
+  }
+
+  private startSimulation(): void {
     const start = performance.now();
     let last = start;
 
-    const frame = (now: number) => {
+    const step = () => {
+      window.setTimeout(step, this.simulationInterval);
+
+      const now = performance.now();
       const time = now - start;
       const dt = now - last;
       last = now;
-      this.frame(time, dt);
+      this.update(time / 1000, dt / 1000);
+    };
+
+    window.setTimeout(step, this.simulationInterval);
+  }
+
+  private startRender(): void {
+    const frame = () => {
+      this.frame();
       window.requestAnimationFrame(frame);
     };
 
@@ -74,8 +91,7 @@ export abstract class Scene {
     this.context.clearRect(this.viewport.x, this.viewport.y, this.viewport.width, this.viewport.height);
   }
 
-  private frame(time: number, dt: number): void {
-    this.update(time / 1000, dt / 1000);
+  private frame(): void {
     this.render();
   }
 
